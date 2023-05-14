@@ -3,6 +3,7 @@ class Zoo:
     Class zoo that have name capacity, area, where it locates and name.
 
     """
+    instance = None
 
     def __init__(self, area=0, capacity=0, name="noname", location="nowhere"):
         self.__area = area
