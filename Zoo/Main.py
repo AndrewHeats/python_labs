@@ -6,4 +6,4 @@ if __name__ == "__main__":
             Zoo.get_instance(),
             Zoo.get_instance()]
     for zoo in zoos:
-        print(zoo.__repr__())
+        print(zoo.__str__())
