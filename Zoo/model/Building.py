@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class Building(ABC):
+    """
+    This is abstract building class
+    """
     def __init__(self, year_of_building=0, is_residential=False):
         self.year_of_building = year_of_building
         self.is_residential = is_residential
@@ -9,6 +12,9 @@ class Building(ABC):
 
     @abstractmethod
     def calculate_construction_price(self):
+        """
+        This is abstract method which have implementation in children class
+        """
         pass
 
     def __str__(self):
