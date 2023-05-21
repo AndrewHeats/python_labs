@@ -1,4 +1,4 @@
-from model.Building import Building
+from model.building import Building
 
 
 class School(Building):

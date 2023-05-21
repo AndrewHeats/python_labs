@@ -1,8 +1,8 @@
-from manager.BuildingManager import BuildingManager
-from model.Bank import Bank
-from model.Library import Library
-from model.School import School
-from model.Zoo import Zoo
+from manager.building_manager import BuildingManager
+from model.bank import Bank
+from model.library import Library
+from model.school import School
+from model.zoo import Zoo
 
 if __name__ == "__main__":
     buildings = []
