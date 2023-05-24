@@ -1,6 +1,13 @@
-from model.building import Building
+"""
+This is file which have zoo class
+"""
 
 
+from .building import Building
+
+# pylint: disable=line-too-long
+# pylint: disable=too-many-arguments
+# pylint: disable=relative-beyond-top-level
 class Zoo(Building):
     """
     Class zoo that have name capacity, area, where it locates and name.
@@ -8,28 +15,39 @@ class Zoo(Building):
     instance = None
     money_equivalent = 2000
 
-    def __init__(self, area=0, capacity=0, name="noname", location="nowhere", year_of_building=0, is_residential=False):
-        super().__init__(year_of_building, is_residential)
+    def __init__(self, area=0, capacity=0, name="noname", location="nowhere",
+                 year_of_building=0, is_residential=False):
         self.area = area
         self.capacity = capacity
         self.name = name
         self.location = location
+        super().__init__(year_of_building, is_residential)
 
     def __str__(self):
-        return f"Area={self.area}, \
-        capacity={self.capacity}, \
-        name={self.name}, \
-        location={self.location}, \
-        year_of_building={self.year_of_building},\
-        is_residential={self.is_residential}"
+        """
+        This is method which return string with fields and values of the class
+        :return:
+        string
+        """
+        return f"Area={self.area}," + \
+            f"capacity={self.capacity}," + \
+            f"name={self.name}," + \
+            f"location={self.location}," + \
+            f"year_of_building={self.year_of_building}," + \
+            f"is_residential={self.is_residential}"
 
     def __repr__(self):
-        return f"Zoo(Area={self.area}, \
-        capacity={self.capacity}, \
-        name={self.name}, \
-        location={self.location},\
-        year_of_building={self.year_of_building},\
-        is_residential={self.is_residential})"
+        """
+        This is representation method which return string with mame of class, fields and values
+        :return:
+        string
+        """
+        return f"Zoo(Area={self.area}," + \
+            f"capacity={self.capacity}," + \
+            f"name={self.name}," + \
+            f"location={self.location}," + \
+            f"year_of_building={self.year_of_building}," + \
+            f"is_residential={self.is_residential}"
 
     def __cmp__(self, other):
         return self.area == other.area \

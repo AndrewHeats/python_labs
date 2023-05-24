@@ -1,6 +1,12 @@
-from model.building import Building
+"""
+This is file which have library class
+"""
 
 
+from .building import Building
+
+# pylint: disable=too-many-arguments
+# pylint: disable=relative-beyond-top-level
 class Library(Building):
     """
     Class library that have number of halls, number of books which are held there and address.
@@ -9,24 +15,34 @@ class Library(Building):
 
     def __init__(self, number_of_halls=0, number_of_books=0, address="Nowhere",
                  year_of_building=0, is_residential=False):
-        super().__init__(year_of_building, is_residential)
         self.number_of_halls = number_of_halls
         self.number_of_books = number_of_books
         self.address = address
+        super().__init__(year_of_building, is_residential)
 
     def __str__(self):
-        return f"Number of halls = {self.number_of_halls}, \
-               number of books = {self.number_of_books}, \
-               address = {self.address}, \
-               is residential = {self.is_residential}, \
-               year of building = {self.year_of_building}"
+        """
+        This is method which return string with fields and values of the class
+        :return:
+        string
+        """
+        return f"Number of halls = {self.number_of_halls}," + \
+            f"number of books = {self.number_of_books}," + \
+            f"address = {self.address}," + \
+            f"is residential = {self.is_residential}," + \
+            f"year of building = {self.year_of_building}"
 
     def __repr__(self):
-        return f"Library(Number of halls = {self.number_of_halls}, \
-              number of books = {self.number_of_books}, \
-              address = {self.address}, \
-              is residential = {self.is_residential}, \
-              year of building = {self.year_of_building})"
+        """
+        This is representation method which return string with mame of class, fields and values
+        :return:
+        string
+        """
+        return f"Library(Number of halls = {self.number_of_halls}," + \
+            f"number of books = {self.number_of_books}," + \
+            f"address = {self.address}," + \
+            f"is residential = {self.is_residential}," + \
+            f"year of building = {self.year_of_building}"
 
     def calculate_construction_price(self):
         """

@@ -1,3 +1,6 @@
+"""
+This file is the main method which tests if this code compiling well
+"""
 from manager.building_manager import BuildingManager
 from model.bank import Bank
 from model.library import Library
@@ -19,7 +22,7 @@ if __name__ == "__main__":
     residential_buildings = manager.find_residential_buildings()
 
     for building in residential_buildings:
-        print(building.__str__())
+        print(building)
     print("\n")
     for building in buildings_build_after_1999:
-        print(building.__str__())
+        print(building)

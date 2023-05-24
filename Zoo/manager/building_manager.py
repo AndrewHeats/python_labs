@@ -1,3 +1,10 @@
+"""
+This is file which have building manager class
+"""
+
+
+# pylint: disable=line-too-long
+# pylint: disable=too-many-arguments
 class BuildingManager:
     """
     This is class Building manager which have list of buildings and can interact with it
@@ -24,8 +31,10 @@ class BuildingManager:
 
     def find_buildings_build_after(self, year_of_building):
         """
-        this is function which find buildings that are have year of building bigger than year you input
+        this is function which find buildings
+        that are have year of building bigger than year you input
         :return:
         list
         """
-        return list(filter(lambda building: building.year_of_building > year_of_building, self.buildings))
+        return list(filter(lambda building: building.year_of_building > year_of_building,
+                           self.buildings))
