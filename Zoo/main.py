@@ -19,7 +19,7 @@ if __name__ == "__main__":
     manager.add_building(Bank(5, "9:00-18:00", 100, False, 2005))
     manager.add_building(Bank())
     buildings_build_after_1999 = manager.find_buildings_build_after(1999)
-    residential_buildings = manager.find_residential_buildings()
+    residential_buildings = manager.find_residential_buildings(robusta=5, arabica=1)
 
     for building in residential_buildings:
         print(building)
@@ -28,13 +28,10 @@ if __name__ == "__main__":
         print(building)
     print("\n")
     print(list(manager.pairs_of_building_and_construction_price()))
-    '''print(Zoo(49.4, 10, "Hoshin", "Tokyo", 2004, True).all_values_with_type(int))
+    print(Zoo(49.4, 10, "Hoshin", "Tokyo", 2004, True).all_values_with_type(int))
     set_manager1 = set_manager(manager)
     ism = iter(set_manager1)
     for i in ism:
         print(i)
-    '''
     print(manager.is_buildings_build_in(2000))
     print(manager.is_any_residential_building())
-    i = 0
-    manager.some_method(i)

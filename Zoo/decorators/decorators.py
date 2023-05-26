@@ -16,11 +16,12 @@ def write_dictionary_of_kwargs(func):
         with open(file_path, "a") as file:
             func_name = func.__name__
             file.write(func_name)
-            file.write(":\n")
+            file.write(": ")
             for k, v in kwargs.items():
                 arguments = f"{k} = {v}"
-                line = f"{arguments}\n"
+                line = f"{arguments},"
                 file.write(line)
+            file.write("\n")
         return func(*args, **kwargs)
 
     return wrapper

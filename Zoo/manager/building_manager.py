@@ -66,12 +66,13 @@ class BuildingManager:
         self.buildings.append(building)
 
     @write_dictionary_of_kwargs
-    def find_residential_buildings(self):
+    def find_residential_buildings(self, **kwargs):
         """
         this is function which find buildings that are residential
         :return:
         list
         """
+
         return list(filter(lambda building: building.is_residential, self.buildings))
 
     @write_dictionary_of_kwargs
@@ -86,7 +87,7 @@ class BuildingManager:
                            self.buildings))
 
     @write_dictionary_of_kwargs
-    def is_buildings_build_in(self, year=0):
+    def is_buildings_build_in(self, year):
         """
         This method which check
          if all buildings built in specific year
