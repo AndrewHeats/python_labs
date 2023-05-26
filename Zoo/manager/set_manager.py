@@ -44,8 +44,9 @@ class set_manager:
                 self.purpose_index = 0
                 self.building_manager_index += 1
         else:
+            purpose = self.purposes[self.purpose_index]
             self.purpose_index += 1
-            return self.purposes[self.purpose_index - 1]
+            return purpose
 
     def __getitem__(self, item):
         """
