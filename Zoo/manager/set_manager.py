@@ -3,6 +3,7 @@ this is set manager file
 """
 
 
+# pylint: disable = inconsistent-return-statements)
 class SetManager:
     """
     A class that represents a set manager.
@@ -16,9 +17,9 @@ class SetManager:
         """
         self.building_manager = building_manager
         self.purposes = []
-        for b in building_manager.buildings:
-            for p in b.purposes:
-                self.purposes.append(p)
+        for building in building_manager.buildings:
+            for purpose in building.purposes:
+                self.purposes.append(purpose)
         self.building_manager_index = 0
         self.purpose_index = 0
 
@@ -28,6 +29,8 @@ class SetManager:
 
         :return: An iterator object.
         """
+        self.purpose_index = 0
+        self.building_manager_index = 0
         return self
 
     def __next__(self):
@@ -63,6 +66,6 @@ class SetManager:
         :return: A string representation of the class.
         """
         buildings = []
-        for b in self.building_manager.buildings:
-            buildings.append(b)
+        for building in self.building_manager.buildings:
+            buildings.append(building)
         return str(list(zip(buildings, self.purposes)))

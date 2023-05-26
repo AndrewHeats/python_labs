@@ -6,25 +6,26 @@ from decorators.decorators import write_dictionary_of_kwargs, exception_writer
 
 # pylint: disable=line-too-long
 # pylint: disable=too-many-arguments
+# pylint: disable=use-a-generator
 class BuildingManager:
     """
     This is class Building manager which have list of buildings and can interact with it
     """
 
-    def __init__(self, buildings=[]):
+    def __init__(self, buildings):
         self.buildings = buildings
         self.index = 1
 
     def __iter__(self):
+        self.index = 0
         return self
 
     def __next__(self):
         if self.index - 1 > len(self.buildings):
             raise StopIteration
-        else:
-            building = self.buildings[self.index - 1]
-            self.index += 1
-            return building
+        building = self.buildings[self.index - 1]
+        self.index += 1
+        return building
 
     def __getitem__(self, item):
         return type(item), item
@@ -50,7 +51,7 @@ class BuildingManager:
 
     def pairs_of_building_and_construction_price(self):
         """
-        This method which makes pair of
+        This method which makes a pair of
         building and its construction price
         :return:
         zip
@@ -66,7 +67,7 @@ class BuildingManager:
         self.buildings.append(building)
 
     @write_dictionary_of_kwargs
-    def find_residential_buildings(self, **kwargs):
+    def find_residential_buildings(self):
         """
         this is function which find buildings that are residential
         :return:
@@ -103,15 +104,16 @@ class BuildingManager:
         This method which check
          if any buildings residential
         :return:
+        boolean
         """
         return any([building.is_residential for building in self.buildings])
 
     @exception_writer
-    def some_method(self, t):
+    def some_method(self, temp):
         """
         this is additional method
-        :param t:
+        :param temp:
         :return:
         float
         """
-        return 1 / t
+        return 1 / temp

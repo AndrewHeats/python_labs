@@ -9,7 +9,8 @@ from model.school import School
 from model.zoo import Zoo
 
 if __name__ == "__main__":
-    manager = BuildingManager()
+    buildings = []
+    manager = BuildingManager(buildings)
     manager.add_building(Zoo(49.4, 10, "Hoshin", "Tokyo", 2004, True))
     manager.add_building(Zoo())
     manager.add_building(Library(5, 2000, "Stepana bandery", 1980, False))
@@ -19,7 +20,7 @@ if __name__ == "__main__":
     manager.add_building(Bank(5, "9:00-18:00", 100, False, 2005))
     manager.add_building(Bank())
     buildings_build_after_1999 = manager.find_buildings_build_after(1999)
-    residential_buildings = manager.find_residential_buildings(robusta=5, arabica=1)
+    residential_buildings = manager.find_residential_buildings()
 
     for building in residential_buildings:
         print(building)

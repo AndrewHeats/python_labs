@@ -3,6 +3,7 @@ This is a file which contains decorators
 """
 
 
+# pylint: disable = unspecified-encoding
 def write_dictionary_of_kwargs(func):
     """
     This is decorator which write to file
@@ -17,8 +18,8 @@ def write_dictionary_of_kwargs(func):
             func_name = func.__name__
             file.write(func_name)
             file.write(": ")
-            for k, v in kwargs.items():
-                arguments = f"{k} = {v}"
+            for key, value in kwargs.items():
+                arguments = f"{key} = {value}"
                 line = f"{arguments},"
                 file.write(line)
             file.write("\n")
@@ -39,11 +40,10 @@ def exception_writer(func):
         file_path = "D:/python_labs/Zoo/files/ex.txt"
         try:
             result = func(*args, **kwargs)
-        except Exception as e:
+        except Exception as exc:
             with open(file_path, 'a') as file:
-                file.write(f"Method: {func.__name__}, Exception: {type(e).__name__}\n")
+                file.write(f"Method: {func.__name__}, Exception: {type(exc).__name__}\n")
             raise
-        else:
-            return result
+        return result
 
     return wrapper
