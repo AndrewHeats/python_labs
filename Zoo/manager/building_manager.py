@@ -30,12 +30,31 @@ class BuildingManager:
         return type(item), item
 
     def indexing(self):
+        """
+        This is method which return list of tuples
+        with index and building
+        :return:
+        enumerate
+        """
         return enumerate(self.buildings)
 
     def calculate_construction_price_for_every_building(self):
+        """
+        this is method which return a list
+        of calculating construction price of every
+        building in list of buildings
+        :return:
+        list
+        """
         return [building.calculate_construction_price() for building in self.buildings]
 
     def pairs_of_building_and_construction_price(self):
+        """
+        This method which makes pair of
+        building and its construction price
+        :return:
+        zip
+        """
         return zip(self.buildings, self.calculate_construction_price_for_every_building())
 
     def add_building(self, building):
@@ -68,12 +87,30 @@ class BuildingManager:
 
     @write_dictionary_of_kwargs
     def is_buildings_build_in(self, year=0):
+        """
+        This method which check
+         if all buildings built in specific year
+        :param year:
+        :return:
+        boolean
+        """
         return all([building.year_of_building == year for building in self.buildings])
 
     @write_dictionary_of_kwargs
     def is_any_residential_building(self):
+        """
+        This method which check
+         if any buildings residential
+        :return:
+        """
         return any([building.is_residential for building in self.buildings])
 
     @exception_writer
     def some_method(self, t):
+        """
+        this is additional method
+        :param t:
+        :return:
+        float
+        """
         return 1 / t
