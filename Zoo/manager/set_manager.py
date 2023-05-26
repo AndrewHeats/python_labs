@@ -3,7 +3,7 @@ this is set manager file
 """
 
 
-class set_manager:
+class SetManager:
     """
     A class that represents a set manager.
     """
@@ -40,9 +40,8 @@ class set_manager:
         if self.purpose_index >= len(self.purposes):
             if self.building_manager_index >= len(self.building_manager.buildings):
                 raise StopIteration
-            else:
-                self.purpose_index = 0
-                self.building_manager_index += 1
+            self.purpose_index = 0
+            self.building_manager_index += 1
         else:
             purpose = self.purposes[self.purpose_index]
             self.purpose_index += 1

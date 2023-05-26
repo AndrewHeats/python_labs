@@ -2,7 +2,7 @@
 This file is the main method which tests if this code compiling well
 """
 from manager.building_manager import BuildingManager
-from manager.set_manager import set_manager
+from manager.set_manager import SetManager
 from model.bank import Bank
 from model.library import Library
 from model.school import School
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     print("\n")
     print(list(manager.pairs_of_building_and_construction_price()))
     print(Zoo(49.4, 10, "Hoshin", "Tokyo", 2004, True).all_values_with_type(int))
-    set_manager1 = set_manager(manager)
+    set_manager1 = SetManager(manager)
     ism = iter(set_manager1)
     for i in ism:
         print(i)

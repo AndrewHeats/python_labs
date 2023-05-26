@@ -1,4 +1,0 @@
-find_buildings_build_after: 
-find_residential_buildings: robusta = 5,arabica = 1,
-is_buildings_build_in: 
-is_any_residential_building: 
