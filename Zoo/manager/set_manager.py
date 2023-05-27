@@ -40,9 +40,10 @@ class SetManager:
         :return: The next value from the iterator.
         :raises StopIteration: If there are no more values to iterate over.
         """
-        if self.purpose_index >= len(self.purposes):
-            if self.building_manager_index >= len(self.building_manager.buildings):
-                raise StopIteration
+        if self.purpose_index >= len(self.purposes) and \
+                self.building_manager_index >= len(self.building_manager.buildings):
+            raise StopIteration
+        if self.building_manager_index >= len(self.building_manager.buildings):
             self.purpose_index = 0
             self.building_manager_index += 1
         else:
