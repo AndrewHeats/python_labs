@@ -43,7 +43,7 @@ def exception_writer(func):
         except Exception as exc:
             with open(file_path, 'a') as file:
                 file.write(f"Method: {func.__name__}, Exception: {type(exc).__name__}\n")
-            raise
+            raise exc
         return result
 
     return wrapper

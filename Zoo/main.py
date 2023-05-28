@@ -11,14 +11,14 @@ from model.zoo import Zoo
 if __name__ == "__main__":
     buildings = []
     manager = BuildingManager(buildings)
-    manager.add_building(Zoo(49.4, 10, "Hoshin", "Tokyo", 2004, True))
-    manager.add_building(Zoo())
-    manager.add_building(Library(5, 2000, "Stepana bandery", 1980, False))
-    manager.add_building(Library())
-    manager.add_building(School(500, 30, "LPML", 2000, True))
-    manager.add_building(School())
-    manager.add_building(Bank(5, "9:00-18:00", 100, False, 2005))
-    manager.add_building(Bank())
+    manager.add_building(Zoo(49.4, 10, "Hoshin", "Tokyo", 2004, True), message="building add succesfully")
+    manager.add_building(Zoo(), message="building add succesfully")
+    manager.add_building(Library(5, 2000, "Stepana bandery", 1980, False), message="building add succesfully")
+    manager.add_building(Library(), message="building add succesfully")
+    manager.add_building(School(500, 30, "LPML", 2000, True), message="building add succesfully")
+    manager.add_building(School(), message="building add succesfully")
+    manager.add_building(Bank(5, "9:00-18:00", 100, False, 2005), message="building add succesfully")
+    manager.add_building(Bank(), message="building add succesfully")
     buildings_build_after_1999 = manager.find_buildings_build_after(1999)
     residential_buildings = manager.find_residential_buildings()
 
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     print(Zoo(49.4, 10, "Hoshin", "Tokyo", 2004, True).all_values_with_type(int))
     set_manager1 = SetManager(manager)
     ism = iter(set_manager1)
-    for i in ism:
-        print(i)
+    for _ in range(26):
+        print (ism.__next__())
     print(manager.is_buildings_build_in(2000))
     print(manager.is_any_residential_building())

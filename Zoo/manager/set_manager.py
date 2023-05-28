@@ -3,7 +3,6 @@ this is set manager file
 """
 
 
-# pylint: disable = inconsistent-return-statements)
 class SetManager:
     """
     A class that represents a set manager.
@@ -16,10 +15,7 @@ class SetManager:
         :param building_manager: An instance of the building_manager class.
         """
         self.building_manager = building_manager
-        self.purposes = []
-        for building in building_manager.buildings:
-            for purpose in building.purposes:
-                self.purposes.append(purpose)
+        self.purposes = [purpose for building in self.building_manager.buildings for purpose in building.purposes]
         self.building_manager_index = 0
         self.purpose_index = 0
 
@@ -29,8 +25,6 @@ class SetManager:
 
         :return: An iterator object.
         """
-        self.purpose_index = 0
-        self.building_manager_index = 0
         return self
 
     def __next__(self):
@@ -40,25 +34,24 @@ class SetManager:
         :return: The next value from the iterator.
         :raises StopIteration: If there are no more values to iterate over.
         """
-        if self.purpose_index >= len(self.purposes) and \
-                self.building_manager_index >= len(self.building_manager.buildings):
+        if IndexError:
             raise StopIteration
-        if self.building_manager_index >= len(self.building_manager.buildings):
+        if self.building_manager_index > len(self.building_manager.buildings):
             self.purpose_index = 0
             self.building_manager_index += 1
-        else:
-            purpose = self.purposes[self.purpose_index]
-            self.purpose_index += 1
-            return purpose
+        self.purpose_index += 1
+        purpose = self.purposes[self.purpose_index - 1]
+        return purpose
 
-    def __getitem__(self, item):
+    def __getitem__(self, index):
         """
-        Returns the type and value of the given item.
+        Returns the value at the specified index.
 
-        :param item: The item to get type and value for.
-        :return: A tuple containing the type and value of the item.
+        :param index: The index of the value to retrieve.
+        :return: The value at the specified index.
+        :raises IndexError: If the index is out of range.
         """
-        return type(item), item
+        return self.purposes[index]
 
     def __str__(self):
         """
@@ -66,7 +59,5 @@ class SetManager:
 
         :return: A string representation of the class.
         """
-        buildings = []
-        for building in self.building_manager.buildings:
-            buildings.append(building)
+        buildings = [building for building in self.building_manager.buildings]
         return str(list(zip(buildings, self.purposes)))

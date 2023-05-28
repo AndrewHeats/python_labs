@@ -1,7 +1,7 @@
 """
 This is file which have building manager class
 """
-from decorators.decorators import write_dictionary_of_kwargs, exception_writer
+from Zoo.decorators.decorators import write_dictionary_of_kwargs, exception_writer
 
 
 # pylint: disable=line-too-long
@@ -23,12 +23,20 @@ class BuildingManager:
     def __next__(self):
         if self.index - 1 > len(self.buildings):
             raise StopIteration
-        building = self.buildings[self.index - 1]
         self.index += 1
+        building = self.buildings[self.index - 1]
         return building
 
-    def __getitem__(self, item):
-        return type(item), item
+    @exception_writer
+    def __getitem__(self, index):
+        """
+        Returns the value at the specified index.
+
+        :param index: The index of the value to retrieve.
+        :return: The value at the specified index.
+        :raises IndexError: If the index is out of range.
+        """
+        return self.buildings[index]
 
     def indexing(self):
         """
@@ -58,15 +66,16 @@ class BuildingManager:
         """
         return zip(self.buildings, self.calculate_construction_price_for_every_building())
 
-    def add_building(self, building):
+    @write_dictionary_of_kwargs
+    def add_building(self, building, **kwargs):
         """
         this function add building to list of buildings
         :param building:
         :return:
         """
+        print(kwargs)
         self.buildings.append(building)
 
-    @write_dictionary_of_kwargs
     def find_residential_buildings(self):
         """
         this is function which find buildings that are residential
@@ -76,8 +85,7 @@ class BuildingManager:
 
         return list(filter(lambda building: building.is_residential, self.buildings))
 
-    @write_dictionary_of_kwargs
-    def find_buildings_build_after(self, year_of_building=0):
+    def find_buildings_build_after(self, year_of_building):
         """
         this is function which find buildings
         that are have year of building bigger than year you input
@@ -87,7 +95,6 @@ class BuildingManager:
         return list(filter(lambda building: building.year_of_building > year_of_building,
                            self.buildings))
 
-    @write_dictionary_of_kwargs
     def is_buildings_build_in(self, year):
         """
         This method which check
@@ -98,7 +105,6 @@ class BuildingManager:
         """
         return all([building.year_of_building == year for building in self.buildings])
 
-    @write_dictionary_of_kwargs
     def is_any_residential_building(self):
         """
         This method which check
@@ -108,12 +114,3 @@ class BuildingManager:
         """
         return any([building.is_residential for building in self.buildings])
 
-    @exception_writer
-    def some_method(self, temp):
-        """
-        this is additional method
-        :param temp:
-        :return:
-        float
-        """
-        return 1 / temp
