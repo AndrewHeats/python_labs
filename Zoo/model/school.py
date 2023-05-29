@@ -13,6 +13,7 @@ class School(Building):
     Class school that have number of students, number of teachers which and name.
     """
     money_equivalent = 2500
+    purposes = {'educational', 'socialising', 'personal development'}
 
     def __init__(self, number_of_students=0, number_of_teachers=0, name="No name",
                  is_residential=False, year_of_building=0):
@@ -27,11 +28,7 @@ class School(Building):
         :return:
         string
         """
-        return f"Number of students = {self.number_of_students}, " + \
-            f"number of teachers = {self.number_of_teachers}, " + \
-            f"name = {self.name}, " + \
-            f"is residential = {self.is_residential}, " + \
-            f"year of building = {self.year_of_building} "
+        return str(f"{self.__dict__}")
 
     def __repr__(self):
         """
@@ -39,18 +36,16 @@ class School(Building):
         :return:
         string
         """
-        return f"School(Number of students = {self.number_of_students}," + \
-            f"number of teachers = {self.number_of_teachers}," + \
-            f"name = {self.name}," + \
-            f"is residential = {self.is_residential}," + \
-            f"year of building = {self.year_of_building})"
+        return str(f"{self.__class__.__name__}: {self.__dict__}")
 
     def calculate_construction_price(self):
         """
         calculates construction price of school
         by multiplying number of students and money equivalent and dividing them by number of teachers
         :return:
-        float
+        int
             returns amount of money to build this library
         """
-        return self.number_of_students / self.number_of_teachers * self.money_equivalent
+        if not self.number_of_teachers:
+            return 0
+        return int(self.number_of_students / self.number_of_teachers * self.money_equivalent)

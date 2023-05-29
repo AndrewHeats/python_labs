@@ -2,8 +2,8 @@
 This is file which have zoo class
 """
 
-
 from .building import Building
+
 
 # pylint: disable=line-too-long
 # pylint: disable=too-many-arguments
@@ -14,6 +14,9 @@ class Zoo(Building):
     """
     instance = None
     money_equivalent = 2000
+    purposes = {'conservation and species preservation',
+                                    'recreation and inspiration',
+                                    'research and scientific advancement'}
 
     def __init__(self, area=0, capacity=0, name="noname", location="nowhere",
                  year_of_building=0, is_residential=False):
@@ -29,12 +32,7 @@ class Zoo(Building):
         :return:
         string
         """
-        return f"Area={self.area}," + \
-            f"capacity={self.capacity}," + \
-            f"name={self.name}," + \
-            f"location={self.location}," + \
-            f"year_of_building={self.year_of_building}," + \
-            f"is_residential={self.is_residential}"
+        return str(f"{self.__dict__}")
 
     def __repr__(self):
         """
@@ -42,12 +40,7 @@ class Zoo(Building):
         :return:
         string
         """
-        return f"Zoo(Area={self.area}," + \
-            f"capacity={self.capacity}," + \
-            f"name={self.name}," + \
-            f"location={self.location}," + \
-            f"year_of_building={self.year_of_building}," + \
-            f"is_residential={self.is_residential}"
+        return str(f"{self.__class__.__name__}: {self.__dict__}")
 
     def __cmp__(self, other):
         return self.area == other.area \
@@ -106,7 +99,9 @@ class Zoo(Building):
         """calculates construction price of zoo
         by multiplying area and money equivalent and dividing them by capacity
         :return
-        float
+        int
             returns amount of money to build this zoo
         """
-        return self.area / self.capacity * self.money_equivalent
+        if not self.capacity:
+            return 0
+        return int(self.area / self.capacity * self.money_equivalent)

@@ -10,6 +10,8 @@ class Building(ABC):
     """
     This is abstract building class
     """
+    purposes = {}
+
     def __init__(self, year_of_building=0, is_residential=False):
         self.year_of_building = year_of_building
         self.is_residential = is_residential
@@ -27,8 +29,7 @@ class Building(ABC):
         :return:
         string
         """
-        return f"Building(year_of_building={self.year_of_building}, " + \
-            f"is_residential={self.is_residential})"
+        return str(f"{self.__dict__}")
 
     def __repr__(self):
         """
@@ -36,5 +37,7 @@ class Building(ABC):
         :return:
         string
         """
-        return f"Building(year_of_building={self.year_of_building}, " + \
-            f"is_residential={self.is_residential})"
+        return str(f"{self.__class__.__name__}: {self.__dict__}")
+
+    def all_values_with_type(self, type_of_value):
+        return {k: v for k, v in self.__dict__.items() if type(v) == type_of_value}
