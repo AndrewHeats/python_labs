@@ -1,7 +1,7 @@
 """
 This is file which have building manager class
 """
-from Zoo.decorators.decorators import write_dictionary_of_kwargs, exception_writer
+from decorators.decorators import write_dictionary_of_kwargs, exception_writer
 
 
 # pylint: disable=line-too-long

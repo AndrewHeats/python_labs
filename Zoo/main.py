@@ -32,7 +32,12 @@ if __name__ == "__main__":
     print(Zoo(49.4, 10, "Hoshin", "Tokyo", 2004, True).all_values_with_type(int))
     set_manager1 = SetManager(manager)
     ism = iter(set_manager1)
-    for _ in range(26):
-        print (ism.__next__())
+    for i in ism:
+        print(ism.__next__())
+    print(ism)
     print(manager.is_buildings_build_in(2000))
     print(manager.is_any_residential_building())
+    exception_zoo = Zoo(0, 0)
+    exception_zoo.calculate_construction_price()
+    exception_zoo.increase_capacity(100)
+

@@ -1,6 +1,7 @@
 """
 This is a file which contains decorators
 """
+import logging
 
 
 # pylint: disable = unspecified-encoding
@@ -47,3 +48,33 @@ def exception_writer(func):
         return result
 
     return wrapper
+
+
+def logged(mode):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                logger = logging.getLogger()
+                logger.setLevel(logging.ERROR)
+                formatter = logging.Formatter('Exception occurred: %(message)s')
+
+                if mode == 'console':
+                    console_handler = logging.StreamHandler()
+                    console_handler.setLevel(logging.ERROR)
+                    console_handler.setFormatter(formatter)
+                    logger.addHandler(console_handler)
+                    logger.error(str(e))
+                elif mode == 'file':
+                    file_handler = logging.FileHandler('error.log')
+                    file_handler.setLevel(logging.ERROR)
+                    file_handler.setFormatter(formatter)
+                    logger.addHandler(file_handler)
+                    logger.error(str(e))
+                else:
+                    raise ValueError('Invalid logging mode')
+
+        return wrapper
+
+    return decorator

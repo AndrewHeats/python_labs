@@ -34,14 +34,15 @@ class SetManager:
         :return: The next value from the iterator.
         :raises StopIteration: If there are no more values to iterate over.
         """
-        if IndexError:
-            raise StopIteration
-        if self.building_manager_index > len(self.building_manager.buildings):
-            self.purpose_index = 0
-            self.building_manager_index += 1
-        self.purpose_index += 1
-        purpose = self.purposes[self.purpose_index - 1]
-        return purpose
+        if self.purpose_index >= len(self.purposes):
+            if self.building_manager_index >= len(self.building_manager.buildings):
+                raise StopIteration
+            else:
+                self.purpose_index = 0
+                self.building_manager_index += 1
+        else:
+            self.purpose_index += 1
+            return self.purposes[self.purpose_index - 1]
 
     def __getitem__(self, index):
         """

@@ -1,8 +1,9 @@
 """
 This is file which have library class
 """
-
-from .building import Building
+from Zoo.decorators.decorators import logged
+from Zoo.exceptions.exceptions import ConstructionNotExisting
+from Zoo.model.building import Building
 
 
 # pylint: disable=too-many-arguments
@@ -14,7 +15,7 @@ class Library(Building):
     money_equivalent = 500
     purposes = {'access to technology', 'archiving', 'research and study support'}
 
-    def __init__(self, number_of_halls=0, number_of_books=0, address="Nowhere",
+    def __init__(self, number_of_halls=1, number_of_books=1, address="Nowhere",
                  year_of_building=0, is_residential=False):
         self.number_of_halls = number_of_halls
         self.number_of_books = number_of_books
@@ -37,6 +38,7 @@ class Library(Building):
         """
         return str(f"{self.__class__.__name__}: {self.__dict__}")
 
+    @logged("file")
     def calculate_construction_price(self):
         """
         calculates construction price of library
@@ -46,5 +48,5 @@ class Library(Building):
             returns amount of money to build this library
         """
         if not self.number_of_halls:
-            return 0
+            raise ConstructionNotExisting
         return int(self.number_of_books / self.number_of_halls * self.money_equivalent)
