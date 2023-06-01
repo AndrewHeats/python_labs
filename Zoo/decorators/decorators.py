@@ -5,6 +5,9 @@ import logging
 
 
 # pylint: disable = unspecified-encoding
+# pylint: disable = raise-missing-from
+# pylint: disable = broad-exception-caught
+# pylint: disable = inconsistent-return-statements
 def write_dictionary_of_kwargs(func):
     """
     This is decorator which write to file
@@ -51,11 +54,15 @@ def exception_writer(func):
 
 
 def logged(mode):
+    """
+    This is decorator which write exception in
+    file or console
+    """
     def decorator(func):
         def wrapper(*args, **kwargs):
             try:
                 return func(*args, **kwargs)
-            except Exception as e:
+            except Exception as exc:
                 logger = logging.getLogger()
                 logger.setLevel(logging.ERROR)
                 formatter = logging.Formatter('Exception occurred: %(message)s')
@@ -65,13 +72,13 @@ def logged(mode):
                     console_handler.setLevel(logging.ERROR)
                     console_handler.setFormatter(formatter)
                     logger.addHandler(console_handler)
-                    logger.error(str(e))
+                    logger.error(str(exc))
                 elif mode == 'file':
                     file_handler = logging.FileHandler('error.log')
                     file_handler.setLevel(logging.ERROR)
                     file_handler.setFormatter(formatter)
                     logger.addHandler(file_handler)
-                    logger.error(str(e))
+                    logger.error(str(exc))
                 else:
                     raise ValueError('Invalid logging mode')
 
