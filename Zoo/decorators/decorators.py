@@ -2,6 +2,7 @@
 This is a file which contains decorators
 """
 import logging
+from functools import wraps
 
 
 # pylint: disable = unspecified-encoding
@@ -53,34 +54,23 @@ def exception_writer(func):
     return wrapper
 
 
-def logged(mode):
+def logged(exception, mode):
     """
-    This is decorator which write exception in
-    file or console
+    This is decorator which write exceptions to file or
+    print in console
     """
     def decorator(func):
+        @wraps(func)
         def wrapper(*args, **kwargs):
             try:
                 return func(*args, **kwargs)
-            except Exception as exc:
+            except exception as exc:
                 logger = logging.getLogger()
-                logger.setLevel(logging.ERROR)
-                formatter = logging.Formatter('Exception occurred: %(message)s')
-
-                if mode == 'console':
-                    console_handler = logging.StreamHandler()
-                    console_handler.setLevel(logging.ERROR)
-                    console_handler.setFormatter(formatter)
-                    logger.addHandler(console_handler)
-                    logger.error(str(exc))
-                elif mode == 'file':
-                    file_handler = logging.FileHandler('error.log')
-                    file_handler.setLevel(logging.ERROR)
-                    file_handler.setFormatter(formatter)
-                    logger.addHandler(file_handler)
-                    logger.error(str(exc))
-                else:
-                    raise ValueError('Invalid logging mode')
+                if mode == "console":
+                    logger.addHandler(logging.StreamHandler())
+                elif mode == "file":
+                    logger.addHandler(logging.FileHandler("log.txt"))
+                logger.exception(exc)
 
         return wrapper
 

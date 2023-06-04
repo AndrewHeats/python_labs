@@ -39,7 +39,7 @@ class School(Building):
         """
         return str(f"{self.__class__.__name__}: {self.__dict__}")
 
-    @logged("file")
+    @logged(ConstructionNotExisting, "file")
     def calculate_construction_price(self):
         """
         calculates construction price of school

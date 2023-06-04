@@ -65,7 +65,7 @@ class Zoo(Building):
             Zoo.instance = Zoo()
         return Zoo.instance
 
-    @logged("file")
+    @logged(TooLittleSpace, "file")
     def increase_capacity(self, capacity):
         """
         This method increases capacity and return the new value of it
@@ -99,7 +99,7 @@ class Zoo(Building):
         self.area += area
         return self.area
 
-    @logged("console")
+    @logged(ConstructionNotExisting, "console")
     def calculate_construction_price(self):
         """calculates construction price of zoo
         by multiplying area and money equivalent and dividing them by capacity
