@@ -1,6 +1,7 @@
 """
 This file is the main method which tests if this code compiling well
 """
+from Zoo.exceptions.exceptions import ConstructionNotExisting, TooLittleSpace
 from manager.building_manager import BuildingManager
 from manager.set_manager import SetManager
 from model.bank import Bank
@@ -38,6 +39,12 @@ if __name__ == "__main__":
     print(manager.is_buildings_build_in(2000))
     print(manager.is_any_residential_building())
     exception_zoo = Zoo(0, 0)
-    exception_zoo.calculate_construction_price()
-    exception_zoo.increase_capacity(100)
+    try:
+        exception_zoo.calculate_construction_price()
+    except ConstructionNotExisting as exc:
+        print(exc)
+    try:
+        exception_zoo.increase_capacity(100)
+    except TooLittleSpace as exc:
+        print(exc)
 
