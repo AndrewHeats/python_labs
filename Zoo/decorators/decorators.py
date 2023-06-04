@@ -56,8 +56,8 @@ def exception_writer(func):
 
 def logged(exception, mode):
     """
-    This is decorator which write exceptions to file or
-    print in console
+    This is a decorator which writes exceptions to a file or
+    prints them in the console.
     """
     def decorator(func):
         @wraps(func)
@@ -65,12 +65,24 @@ def logged(exception, mode):
             try:
                 return func(*args, **kwargs)
             except exception as exc:
-                logger = logging.getLogger()
+                logger = logging.getLogger(func.__name__)
+
                 if mode == "console":
-                    logger.addHandler(logging.StreamHandler())
+                    console_handler = logging.StreamHandler()
+                    console_handler.setLevel(logging.ERROR)
+                    logger.addHandler(console_handler)
+                    logger.error(exc)
+                    logger.removeHandler(console_handler)
                 elif mode == "file":
-                    logger.addHandler(logging.FileHandler("log.txt"))
-                logger.exception(exc)
+                    file_handler = logging.FileHandler("log.txt")
+                    file_handler.setLevel(logging.ERROR)
+                    logger.addHandler(file_handler)
+                    logger.error(exc)
+                    logger.removeHandler(file_handler)
+                else:
+                    raise ValueError("Invalid logging mode. Please choose 'console' or 'file'.")
+
+
 
         return wrapper
 
