@@ -1,10 +1,11 @@
 """
 This is file which have school class
 """
+from Zoo.decorators.decorators import logged
+from Zoo.model.building import Building
+from Zoo.exceptions.exceptions import ConstructionNotExisting
 
 
-
-from .building import Building
 # pylint: disable=line-too-long
 # pylint: disable=too-many-arguments
 # pylint: disable=relative-beyond-top-level
@@ -15,7 +16,7 @@ class School(Building):
     money_equivalent = 2500
     purposes = {'educational', 'socialising', 'personal development'}
 
-    def __init__(self, number_of_students=0, number_of_teachers=0, name="No name",
+    def __init__(self, number_of_students=1, number_of_teachers=1, name="No name",
                  is_residential=False, year_of_building=0):
         self.number_of_students = number_of_students
         self.number_of_teachers = number_of_teachers
@@ -38,6 +39,7 @@ class School(Building):
         """
         return str(f"{self.__class__.__name__}: {self.__dict__}")
 
+    @logged(ConstructionNotExisting, "file")
     def calculate_construction_price(self):
         """
         calculates construction price of school
@@ -47,5 +49,5 @@ class School(Building):
             returns amount of money to build this library
         """
         if not self.number_of_teachers:
-            return 0
+            raise ConstructionNotExisting
         return int(self.number_of_students / self.number_of_teachers * self.money_equivalent)

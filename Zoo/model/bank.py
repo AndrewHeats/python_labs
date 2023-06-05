@@ -1,9 +1,9 @@
 """
 This is file which have bank class
 """
-
-
-from .building import Building
+from Zoo.decorators.decorators import logged
+from Zoo.model.building import Building
+from Zoo.exceptions.exceptions import ConstructionNotExisting
 
 
 # pylint: disable=line-too-long
@@ -17,7 +17,7 @@ class Bank(Building):
     money_equivalent = 3000
     purposes = {'financial', 'safekeeping', 'payment and transaction processing'}
 
-    def __init__(self, number_of_cashier=0, open_close_hours="00:00-00:00", max_number_of_people=0,
+    def __init__(self, number_of_cashier=1, open_close_hours="00:00-00:00", max_number_of_people=1,
                  is_residential=False, year_of_building=0):
         self.number_of_cashier = number_of_cashier
         self.open_close_hours = open_close_hours
@@ -40,6 +40,7 @@ class Bank(Building):
         """
         return str(f"{self.__class__.__name__}: {self.__dict__}")
 
+    @logged(ConstructionNotExisting, "file")
     def calculate_construction_price(self):
         """
         calculates construction price of bank
@@ -50,5 +51,5 @@ class Bank(Building):
             returns amount of money to build this bank
         """
         if not self.number_of_cashier:
-            return 0
+            raise ConstructionNotExisting
         return int(self.max_number_of_people / self.number_of_cashier * self.money_equivalent)

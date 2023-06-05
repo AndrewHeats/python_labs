@@ -1,8 +1,9 @@
 """
 This is file which have zoo class
 """
-
-from .building import Building
+from Zoo.decorators.decorators import logged
+from Zoo.model.building import Building
+from Zoo.exceptions.exceptions import ConstructionNotExisting, TooLittleSpace
 
 
 # pylint: disable=line-too-long
@@ -18,7 +19,7 @@ class Zoo(Building):
                                     'recreation and inspiration',
                                     'research and scientific advancement'}
 
-    def __init__(self, area=0, capacity=0, name="noname", location="nowhere",
+    def __init__(self, area=1, capacity=1, name="noname", location="nowhere",
                  year_of_building=0, is_residential=False):
         self.area = area
         self.capacity = capacity
@@ -64,6 +65,7 @@ class Zoo(Building):
             Zoo.instance = Zoo()
         return Zoo.instance
 
+    @logged(TooLittleSpace, "file")
     def increase_capacity(self, capacity):
         """
         This method increases capacity and return the new value of it
@@ -71,6 +73,8 @@ class Zoo(Building):
         int
             returns new capacity value
         """
+        if self.area - 10 < self.capacity:
+            raise TooLittleSpace(self.area, self.capacity)
         self.capacity += capacity
         return self.capacity
 
@@ -95,6 +99,7 @@ class Zoo(Building):
         self.area += area
         return self.area
 
+    @logged(ConstructionNotExisting, "console")
     def calculate_construction_price(self):
         """calculates construction price of zoo
         by multiplying area and money equivalent and dividing them by capacity
@@ -103,5 +108,5 @@ class Zoo(Building):
             returns amount of money to build this zoo
         """
         if not self.capacity:
-            return 0
+            raise ConstructionNotExisting
         return int(self.area / self.capacity * self.money_equivalent)

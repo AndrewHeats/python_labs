@@ -1,1 +1,0 @@
-Method: __next__, Exception: IndexError
